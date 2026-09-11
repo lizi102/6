@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>369账户团队 - 登录</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-box {
+            background: #16213e;
+            border-radius: 16px;
+            padding: 48px 40px;
+            width: 360px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .login-box h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 8px;
+            color: #00d4ff;
+        }
+        .login-box p {
+            font-size: 13px;
+            text-align: center;
+            color: #888;
+            margin-bottom: 32px;
+        }
+        .login-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .login-btn:hover { opacity: 0.85; }
+        .btn-wechat { background: #07C160; color: #fff; }
+        .btn-qq { background: #12B7F5; color: #fff; }
+        .btn-microsoft { background: #0078D4; color: #fff; }
+        .btn-github { background: #24292e; color: #fff; }
+        .footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>369账户团队</h1>
+        <p>选择一种方式登录</p>
+
+        <button class="login-btn btn-wechat" onclick="login('wechat')">微信登录</button>
+        <button class="login-btn btn-qq" onclick="login('qq')">QQ登录</button>
+        <button class="login-btn btn-microsoft" onclick="login('microsoft')">微软账号登录</button>
+        <button class="login-btn btn-github" onclick="login('github')">GitHub登录</button>
+
+        <div class="footer">© 2026 369工作室 用代码解决问题</div>
+    </div>
+
+    <script>
+        // 369 账户团队的 GitHub OAuth App 配置
+        const CLIENT_ID = 'Ov23li9bxe5dRKsSsoRM';
+        const REDIRECT_URI = 'https://lz102.github.io/6/callback.html';
+
+        function login(provider) {
+            if (provider === 'github') {
+                const authUrl = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=user:email`;
+                window.location.href = authUrl;
+            } else {
+                alert('暂未开发，敬请期待！');
+            }
+        }
+    </script>
+</body>
+</html>
