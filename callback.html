@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>369账户团队 - 登录回调</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .box {
+            background: #16213e;
+            border-radius: 16px;
+            padding: 40px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+        }
+        .box h1 {
+            font-size: 20px;
+            color: #00d4ff;
+            margin-bottom: 16px;
+        }
+        .box p {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            background: #00d4ff;
+            color: #1a1a2e;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn:hover { opacity: 0.85; }
+        .status {
+            font-size: 13px;
+            color: #888;
+            margin-top: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>369账户团队</h1>
+        <p id="message">正在处理登录授权，请稍候...</p>
+        <div class="status" id="status"></div>
+        <p style="margin-top:20px;"><a href="https://lz102.github.io/6/" class="btn">返回登录页</a></p>
+    </div>
+
+    <script>
+        const CLIENT_ID = 'Ov23li9bxe5dRKsSsoRM';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const code = urlParams.get('code');
+        const error = urlParams.get('error');
+
+        const messageEl = document.getElementById('message');
+        const statusEl = document.getElementById('status');
+
+        if (error) {
+            messageEl.textContent = '授权失败：' + error;
+            statusEl.textContent = '你可以关闭此页面，重新登录。';
+        } else if (code) {
+            messageEl.textContent = '授权成功！';
+            statusEl.textContent = '授权码：' + code.substring(0, 10) + '... (正在处理)';
+            // 提示：真正的兑换 Token 步骤必须在后台服务器完成，前端只显示状态。
+            // 为了测试跳转流程，这里只是把授权码显示出来。
+        } else {
+            messageEl.textContent = '没有检测到授权码';
+            statusEl.textContent = '请从登录页重新发起授权。';
+        }
+    </script>
+</body>
+</html>
